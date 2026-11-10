@@ -33,7 +33,7 @@ function normalizeGlobal(p) {
 function normalizeChina(p){
   const fee=p.fee||'未披露'; const aid=p.aid||'未披露';
   return {...p,mainland:'conditional',cost:/完全免费|申请.*免费/.test(fee)?'free':'unknown',
-    application_window:'2026项目历史记录；下一届请查官方公告',
+    application_window:`${p.year}届资料；实际申请期请查相应年份官方公告`,
     output:p.tier==='exposure'?'短期参与和科学体验；不保证独立研究产出':p.tier==='admissions'?'大学正式入学与培养；不是暑期科研成果':'导师指导/研究训练；实际成果依培养情况',
     mentorship:p.tier==='mentor'?'高校科学家或导师团队指导；实际分配以公告为准':p.tier==='admissions'?'入学后课程与学术导师':'高校组织科学体验或项目学习',
     accommodation:'本地活动为主；是否安排交通和住宿须查看当届通知',
@@ -52,7 +52,8 @@ for(const p of records){
 }
 if(errors.length){ console.error(errors.join('\n'));process.exit(1); }
 const byTier={},byCountry={};for(const r of records){byTier[r.tier]=(byTier[r.tier]||0)+1;byCountry[r.country]=(byCountry[r.country]||0)+1;}
-const output={schema_version:'1.0.0',as_of:date,generated_on:new Date().toISOString().slice(0,10),total:records.length,china_added:china.programs.length,counts:{byTier,byCountry},caveat:'Historical entries are not proof of a new application cycle. One umbrella program may have multiple campus tracks. Eligibility and deadlines must be rechecked at official sources.',programs:records};
+const newest=records.map(p=>p.checked_at).filter(v=>/^\d{4}-\d{2}-\d{2}$/.test(v)).sort().at(-1)||date;
+const output={schema_version:'1.0.0',as_of:newest,generated_on:new Date().toISOString().slice(0,10),total:records.length,china_added:china.programs.length,counts:{byTier,byCountry},caveat:'Historical entries are not proof of a new application cycle. One umbrella program may have multiple campus tracks. Eligibility and deadlines must be rechecked at official sources.',programs:records};
 const filename=resolve(root,'docs/data/catalog.json');
 const content=JSON.stringify(output,null,2)+'\n';
 if(process.argv.includes('--check')){console.log('Validated '+records.length+' records; '+china.programs.length+' Chinese campus tracks.');process.exit(0);}
