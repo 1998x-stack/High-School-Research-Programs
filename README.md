@@ -18,9 +18,9 @@
 
 **Research Atlas** 是一个可检索、可追溯官方来源、持续增长的高中生科研机会数据库。除了美国和全球的高中科研暑期项目，我们特别研究中国高校、科研院所、省级教育部门以及企业联合开展的青少年科研培养计划。
 
-截至 **2026-11-10**，已整合 **75 条全球基础数据 + 53 条中国高校和科研机构专项承办轨道 = 128 条记录**。
+截至 **2026-11-10**，已整合 **75 条全球基础数据 + 75 条中国高校和科研机构专项承办轨道 = 150 条记录**。
 
-> 注意：128 是数据库**记录 / 承办轨道数量**，不是 128 个互不相干的科研实习。全国计划不同大学的培养基地或分营会分别收录。往届项目出现于数据库不意味着目前仍开放报名。
+> 注意：150 是数据库**记录 / 承办轨道数量**，不是 150 个互不相干的科研实习。全国计划不同大学的培养基地或分营会分别收录。往届项目出现于数据库不意味着目前仍开放报名。
 
 ### 产品能力
 
@@ -54,6 +54,8 @@
 
 已收录的重点方向（仍在扩展）：
 
+- **最新补充的省级科研体系**：山西大学 2026、东北大学 2026、河北四所高校 2025、吉林两所高校 2025、中国科大和中科院合肥物质院 2026、北京青少年科技后备人才计划及北大 A 计划、甘肃飞天英才五家培养单位等。
+
 - **中学生英才计划**：2026 年上海五所基地（复旦、上海交大、同济、华东师大、华东理工）；江苏六所基地（南京大学、东南大学、南京航空航天大学、南京理工大学、南京农业大学、南京师范大学）；湖北四所基地（武汉大学、华中科技大学、华中农业大学、华中师范大学）；重庆大学、大连理工大学，以及有其他年份官方证据的高校轨道。
 - **青少年高校科学营**：2026 年上海、江苏、北京、浙江、重庆的高校分营。按短期科学体验收录，不把参观实验室包装成科研实习。
 - **广州中学生科技特训营**：华南理工大学、暨南大学、中国科学院广州地区多个研究所等承办轨道。
@@ -75,9 +77,10 @@
 | 路径 | 用途 |
 | --- | --- |
 | **data/global-2026-2027.json** | 初始 75 条全球项目与正式官方网址（保留丰富原始中文字段） |
-| **data/china-university-programs.json** | 新增 53 条中国高校、院所、分营和专项招生轨道 |
+| **data/china-university-programs.json** | 新增 75 条中国高校、院所、分营和专项招生轨道 |
 | **scripts/build.mjs** | 统一字段、验证来源/编号/日期、生成检索索引 |
 | **docs/data/catalog.json** | 自动生成的统一字段数据，供网站加载 |
+| **scripts/export.mjs / audit.mjs** | 自动生成整站 CSV/NDJSON 及数据质量报告 |
 | **docs/index.html** | GitHub Pages 入口 |
 | **docs/assets/** | 无前端框架依赖的网页样式与交互 |
 | **.github/workflows/pages.yml** | 主分支提交后自动验证、生成并部署网站 |
@@ -91,6 +94,8 @@
     cd High-School-Research-Programs
     node scripts/build.mjs --check
     node scripts/build.mjs
+    node scripts/export.mjs
+    node scripts/audit.mjs
     python3 -m http.server 8000 --directory docs
 
 然后访问 http://localhost:8000 。为避免浏览器本地文件访问限制，不要直接双击 HTML 文件。
@@ -133,7 +138,7 @@
 
 Research Atlas is an **open, community-maintained catalog for high-school research opportunities worldwide**. We index lab internships, mentored projects, science exposure camps, academic competitions, and early university admission pathways as **different categories**, each with source URLs, program year, eligibility notes and cost information.
 
-The initial release includes **128 searchable records/tracks**, of which **53** are newly researched China-focused university/institute tracks. Some records are campuses or tracks of a shared umbrella program, not separate internships. The evidence baseline is **2026-11-10**. Historical listings are not proof of current availability.
+The initial release includes **150 searchable records/tracks**, of which **75** are newly researched China-focused university/institute tracks. Some records are campuses or tracks of a shared umbrella program, not separate internships. The evidence baseline is **2026-11-10**. Historical listings are not proof of current availability.
 
 [Explore the interactive site](https://1998x-stack.github.io/High-School-Research-Programs/) · [Help correct or expand this database](../../issues/new)
 
