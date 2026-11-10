@@ -80,7 +80,7 @@
 | **data/china-university-programs.json** | 新增 75 条中国高校、院所、分营和专项招生轨道 |
 | **scripts/build.mjs** | 统一字段、验证来源/编号/日期、生成检索索引 |
 | **docs/data/catalog.json** | 自动生成的统一字段数据，供网站加载 |
-| **scripts/export.mjs / audit.mjs** | 自动生成整站 CSV/NDJSON 及数据质量报告 |
+| **scripts/export.mjs / audit.mjs / export_sqlite.py** | 自动生成 CSV、NDJSON、SQLite 及质量报告 |
 | **docs/index.html** | GitHub Pages 入口 |
 | **docs/assets/** | 无前端框架依赖的网页样式与交互 |
 | **.github/workflows/pages.yml** | 主分支提交后自动验证、生成并部署网站 |
@@ -96,9 +96,14 @@
     node scripts/build.mjs
     node scripts/export.mjs
     node scripts/audit.mjs
+    python3 scripts/export_sqlite.py
     python3 -m http.server 8000 --directory docs
 
 然后访问 http://localhost:8000 。为避免浏览器本地文件访问限制，不要直接双击 HTML 文件。
+
+### GitHub Pages 首次启用（仓库所有者执行一次）
+
+站点文件和 CI 已提交，但 GitHub Pages 必须先在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。随后通过 **Actions → Deploy Research Atlas → Run workflow** 触发首次部署，或者再次提交相关文件。没有完成该操作之前，站点链接可能返回 404。
 
 ### 数据如何持续更新？
 
