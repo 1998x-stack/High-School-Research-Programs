@@ -1,0 +1,82 @@
+{
+  "produced_at": "2026-11-10",
+  "origin_as_of": "2026-11-10",
+  "records": 150,
+  "campus_tracks": 75,
+  "research_type_counts": {
+    "lab": 26,
+    "mentor": 61,
+    "structured": 24,
+    "course": 6,
+    "community": 10,
+    "commercial": 4,
+    "exposure": 13,
+    "admissions": 6
+  },
+  "findings": [
+    {
+      "id": "HSR-024",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "HSR-025",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-001",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-002",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-003",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-004",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-005",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-048",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-050",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-051",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-052",
+      "severity": "info",
+      "code": "past_deadline"
+    },
+    {
+      "id": "CN-053",
+      "severity": "info",
+      "code": "past_deadline"
+    }
+  ],
+  "counts_by_finding": {
+    "past_deadline": 12
+  },
+  "note": "OFFLINE consistency snapshot. Sources, current intakes and eligibility require manual source re-verification."
+}
