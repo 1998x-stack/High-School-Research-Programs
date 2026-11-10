@@ -36,6 +36,7 @@ jobs:
         run: |
           node scripts/export.mjs
           node scripts/audit.mjs
+          python3 scripts/export_sqlite.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
