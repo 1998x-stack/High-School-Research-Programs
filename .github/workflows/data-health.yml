@@ -1,0 +1,39 @@
+name: Data quality and freshness
+on:
+  pull_request:
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "docs/assets/app.js"
+      - ".github/workflows/data-health.yml"
+  schedule:
+    - cron: '23 5 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate source records
+        run: node scripts/build.mjs --check
+      - name: Build canonical index and machine-readable exports
+        run: |
+          node scripts/build.mjs
+          node scripts/export.mjs
+          node scripts/audit.mjs
+          node --check docs/assets/app.js
+      - name: Report counts
+        run: |
+          node -e "const d=require('./docs/data/quality.json');console.log('Entries:',d.records,'China tracks:',d.campus_tracks,'Audit findings:',JSON.stringify(d.counts_by_finding))"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: research-atlas-data-quality
+          path: |
+            docs/data/quality.json
+            docs/data/catalog.csv
+            docs/data/catalog.ndjson
